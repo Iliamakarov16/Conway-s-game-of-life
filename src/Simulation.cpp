@@ -16,23 +16,50 @@ bool Simulation::getValue(const int& row, const int& col) const{
 
 int Simulation::countLiveNeighbors(int row, int col){
     int count = 0;
-    std::vector<std::pair<int, int>> neighbors = 
+    std::vector<std::pair<int, int>> neighborsOffset = 
     {
-        {row + 1, col},//above
-        {row - 1, col},//below
-        {row, col + 1},//right
-        {row, col - 1},//left
-        {row + 1, col + 1},//upper right
-        {row + 1, col - 1},//upper left
-        {row - 1, col + 1},//lower right
-        {row - 1, col - 1}//lower left
+        {1, 0},//above
+        {-1, 0},//below
+        {0, 1},//right
+        {0, -1},//left
+        {1, 1},//upper right
+        {1, -1},//upper left
+        {-1, 1},//lower right
+        {-1, -1}//lower left
     };
 
-    for (const auto& neighbor : neighbors){
-        if (getValue(neighbor.first, neighbor.second)){
+    for (const auto& offset : neighborsOffset){
+        if (getValue((row + offset.first + grid.getRows()) % grid.getRows(), 
+           (col + offset.second + grid.getCols()) % grid.getCols())){
             count++;
         }
     }
     
     return count;
+}
+
+void Simulation::update(){
+    for (int row = 0; row < grid.getRows(); row++){
+        for(int col = 0; col < grid.getCols(); col++){
+            int liveNeighbors = countLiveNeighbors(row, col);
+            bool cellValue = grid.getValue(row, col);
+            if (cellValue){
+                if (liveNeighbors > 3 || liveNeighbors < 2){
+                    tempGrid.setValue(row, col, false);
+                }
+                else{
+                    tempGrid.setValue(row, col, true);
+                }
+            }
+            else{
+                if (liveNeighbors == 3){
+                    tempGrid.setValue(row, col, true);
+                }
+                else{
+                    tempGrid.setValue(row, col, false);
+                }
+            }
+        }
+    }
+    grid = tempGrid;
 }

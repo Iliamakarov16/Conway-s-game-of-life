@@ -14,4 +14,11 @@ public:
     void draw();
     void setValue(const int& row, const int& col, const bool& val);
     bool getValue(const int& row, const int& col) const;
+
+    bool isValidCell(const int&  row, const int&  col) const;
+
+    int getRows() const{return rows_;}
+    int getCols() const{return columns_;}
+
+    void fillRand();
 };

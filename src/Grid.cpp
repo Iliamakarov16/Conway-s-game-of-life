@@ -10,13 +10,29 @@ void Grid::draw(){
 }
 
 void Grid::setValue(const int& row, const int&  col, const bool&  val){
-    if ((row > rows_ || row < 0) || (col > columns_ || col < 0)) throw std::out_of_range("Cell does not exist");
-
-    cells_[row][col] = val;
+    if (isValidCell(row, col)){
+        cells_[row][col] = val;
+    }
 }
 
 bool Grid::getValue(const int& row, const int& col) const{
-    if ((row > rows_ || row < 0) || (col > columns_ || col < 0)) throw std::out_of_range("Cell does not exist");
-    
-    return cells_[row][col];
+    if (isValidCell(row, col)){
+        return cells_[row][col];
+    }
+
+
+}
+bool Grid::isValidCell(const int&  row, const int&  col) const{
+    if ((row < rows_ || row >= 0) || (col < columns_ || col >= 0)) return true;
+
+    return false;
+}
+
+void Grid::fillRand(){
+    for (int row = 0; row < rows_; row++){
+        for (int col = 0; col < columns_; col++){
+            bool randVal = GetRandomValue(0, 4);
+            cells_[row][col] = (randVal == 4) ? 1 : 0;
+        }
+    }
 }

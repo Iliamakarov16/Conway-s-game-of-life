@@ -1,3 +1,4 @@
+#include <iostream>
 #include "include/raylib.h"
 #include "Simulation.hpp"
 
@@ -14,13 +15,16 @@ int main()
 
     Simulation sim(SCREEN_WIDTH, SCREEN_HEIGHT, CELL_SIZE);
     
-    sim.setValue(5, 9, true);
     sim.setValue(5, 10, true);
+    sim.setValue(5, 11, true);
+    
 
     while (!WindowShouldClose())
     { 
         BeginDrawing();
+        sim.update();
         ClearBackground(BLACK);
+        sim.draw();
         EndDrawing();
     }
     
