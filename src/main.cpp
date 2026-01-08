@@ -21,8 +21,8 @@ int main()
 
     while (!WindowShouldClose())
     { 
-        BeginDrawing();
         sim.update();
+        BeginDrawing();
         ClearBackground(BLACK);
         sim.draw();
         EndDrawing();

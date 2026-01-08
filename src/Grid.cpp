@@ -20,19 +20,18 @@ bool Grid::getValue(const int& row, const int& col) const{
         return cells_[row][col];
     }
 
-
-}
-bool Grid::isValidCell(const int&  row, const int&  col) const{
-    if ((row < rows_ || row >= 0) || (col < columns_ || col >= 0)) return true;
-
     return false;
+}
+
+bool Grid::isValidCell(const int&  row, const int&  col) const{
+    return row >= 0 && row < rows_ && col >= 0 && col < columns_;
 }
 
 void Grid::fillRand(){
     for (int row = 0; row < rows_; row++){
         for (int col = 0; col < columns_; col++){
-            bool randVal = GetRandomValue(0, 4);
-            cells_[row][col] = (randVal == 4) ? 1 : 0;
+            int randVal = GetRandomValue(0, 4);
+            cells_[row][col] = (randVal == 4);
         }
     }
 }
