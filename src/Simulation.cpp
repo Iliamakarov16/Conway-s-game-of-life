@@ -41,9 +41,12 @@ int Simulation::countLiveNeighbors(int row, int col){
 void Simulation::update(){
     for (int row = 0; row < grid.getRows(); row++){
         for(int col = 0; col < grid.getCols(); col++){
+
             int liveNeighbors = countLiveNeighbors(row, col);
             bool cellValue = grid.getValue(row, col);
+
             if (cellValue){
+
                 if (liveNeighbors > 3 || liveNeighbors < 2){
                     tempGrid.setValue(row, col, false);
                 }
@@ -52,6 +55,7 @@ void Simulation::update(){
                 }
             }
             else{
+
                 if (liveNeighbors == 3){
                     tempGrid.setValue(row, col, true);
                 }
@@ -62,4 +66,38 @@ void Simulation::update(){
         }
     }
     grid = tempGrid;
+}
+
+void Simulation::toggleCell(const int& row, const int& col){
+    grid.toggleCell(row, col);
+}
+
+void Simulation::simCommands(){
+    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && !isActive){
+        Vector2 mousePos = GetMousePosition();
+        toggleCell(mousePos.x, mousePos.y);
+    }
+
+    if (IsKeyPressed(KEY_ENTER)){//starts and stops simulation
+        changeGameState();
+    }
+
+    if(IsKeyPressed(KEY_E)){//increase fps
+        int fps = GetFPS();
+        fps += 1;
+        SetTargetFPS(fps);
+    }
+    else if(IsKeyPressed(KEY_Q)){//decrease fps
+        int fps = GetFPS();
+        fps -= 1;
+        SetTargetFPS(fps);
+    }
+
+    if(IsKeyPressed(KEY_R) && !isActive){//randomize grid
+        grid.fillRand();
+    }
+
+    if(IsKeyPressed(KEY_C) && !isActive){//clear grid
+        grid.clear();
+    }
 }

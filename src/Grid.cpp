@@ -35,3 +35,18 @@ void Grid::fillRand(){
         }
     }
 }
+
+void Grid::clear(){
+    for (int row = 0; row < rows_; row++){
+        for (int col = 0; col < columns_; col++){
+            cells_[row][col] = 0;
+        }
+    }
+}
+
+void Grid::toggleCell(const int& row, const int& col){
+    if (isValidCell(row / cellSize_, col / cellSize_)){
+        cells_[row / cellSize_][col / cellSize_] = !cells_[row / cellSize_][col / cellSize_];
+    }
+    
+}

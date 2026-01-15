@@ -21,4 +21,7 @@ public:
     int getCols() const{return columns_;}
 
     void fillRand();
+    void clear();
+
+    void toggleCell(const int& row, const int& col);
 };
