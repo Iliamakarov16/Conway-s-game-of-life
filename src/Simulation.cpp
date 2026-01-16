@@ -16,17 +16,15 @@ bool Simulation::getValue(const int& row, const int& col) const{
 
 int Simulation::countLiveNeighbors(int row, int col){
     int count = 0;
-    std::vector<std::pair<int, int>> neighborsOffset = 
-    {
-        {0, 1},  // above
-        {0, -1}, // below
-        {1, 0},  // right
-        {-1, 0}, // left
-        {1, 1},  // upper right
-        {-1, 1}, // upper left
-        {1, -1}, // lower right
-        {-1, -1} // lower left
-    }{};
+    std::vector<std::pair<int, int>> neighborsOffset = {
+        {-1, 0}, // above
+        {1, 0},  // below
+        {0, 1},  // right
+        {0, -1}, // left
+        {-1, 1}, // upper right
+        {-1, -1}, // upper left
+        {1, 1},  // lower right
+        {1, -1}  // lower left
     };
 
     for (const auto& offset : neighborsOffset){
