@@ -6,7 +6,7 @@ How to play?
      2. Click on "main.code-workspace" file and click "Open Workspace".
      3. After this you will be able to run game by opening main.cpp and clicking F5(or fn + F5 if using Mac) to run it.
 
-Controlls
+Controls
 1. Click on cells to enable/disable it.
 2. Enter to start/pause simulation.
 3. E to increase Q to decrease fps(speed).
